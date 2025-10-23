@@ -29,19 +29,35 @@
 		F936F2DF2EA4BC9D001FEBFB /* PlantoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F9842E312EA93E5900B87E3B /* Exceptions for "PlantoUITests" folder in "PlantoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PlantoTests/PlantoTests.swift,
+			);
+			target = F936F2D42EA4BC9D001FEBFB /* PlantoTests */;
+		};
+		F9842E322EA93E5900B87E3B /* Exceptions for "PlantoUITests" folder in "PlantoUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PlantoTests/PlantoTests.swift,
+			);
+			target = F936F2DE2EA4BC9D001FEBFB /* PlantoUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F936F2CA2EA4BC9C001FEBFB /* Planto */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Planto;
 			sourceTree = "<group>";
 		};
-		F936F2D82EA4BC9D001FEBFB /* PlantoTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PlantoTests;
-			sourceTree = "<group>";
-		};
 		F936F2E22EA4BC9D001FEBFB /* PlantoUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F9842E312EA93E5900B87E3B /* Exceptions for "PlantoUITests" folder in "PlantoTests" target */,
+				F9842E322EA93E5900B87E3B /* Exceptions for "PlantoUITests" folder in "PlantoUITests" target */,
+			);
 			path = PlantoUITests;
 			sourceTree = "<group>";
 		};
@@ -76,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				F936F2CA2EA4BC9C001FEBFB /* Planto */,
-				F936F2D82EA4BC9D001FEBFB /* PlantoTests */,
 				F936F2E22EA4BC9D001FEBFB /* PlantoUITests */,
 				F936F2C92EA4BC9C001FEBFB /* Products */,
 			);
@@ -129,9 +144,6 @@
 			);
 			dependencies = (
 				F936F2D72EA4BC9D001FEBFB /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F936F2D82EA4BC9D001FEBFB /* PlantoTests */,
 			);
 			name = PlantoTests;
 			packageProductDependencies = (
@@ -393,6 +405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -424,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
