@@ -28,7 +28,7 @@ struct LiquidGlassButtonStyle: ButtonStyle {
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
                         .fill(
                             LinearGradient(
-                                colors: [Color.white.opacity(pressed ? 0.06 : 0.14), .clear],
+                                colors: [Color.white.opacity(pressed ? 0.10 : 0.14), .clear],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -37,13 +37,13 @@ struct LiquidGlassButtonStyle: ButtonStyle {
 
                     // طبقة لمعان خفيفة من الداخل (يشبه الزجاج)
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .stroke(Color.white.opacity(0.22), lineWidth: 1)
+                        .stroke(Color.white.opacity(0.22), lineWidth: 6)
                 }
             )
             // حدود بنفس الأخضر لإحساس زجاجي
             .overlay(
                 RoundedRectangle(cornerRadius: 26, style: .continuous)
-                    .stroke(Color("color3").opacity(200), lineWidth: 10)
+                    .stroke(Color("color3").opacity(10), lineWidth: 1)
             )
             .shadow(color: .black.opacity(0.35), radius: pressed ? 8 : 14, x: 0, y: pressed ? 3 : 6)
             .scaleEffect(pressed ? 0.98 : 1.0)

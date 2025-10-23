@@ -41,7 +41,7 @@ struct StartView: View {
                     Text("Now all your plants will be in one place and we will help you take care of them :) 🪴")
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color("color4"))                  // <- color4
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                 }
 
                 Button { showReminder = true } label: {
