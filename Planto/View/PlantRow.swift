@@ -26,7 +26,7 @@ struct PlantRow: View {
                 Button(action: onToggle) {
                     Image(systemName: isDoneToday ? "checkmark.circle.fill" : "circle")
                         .font(.title3)
-                        .foregroundStyle(isDoneToday ? Color("color1") : .secondary)
+                        .foregroundStyle(isDoneToday ? Color("color3") : .secondary) // إن حبيتي
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
@@ -60,9 +60,9 @@ private struct Chip: View {
         .padding(.horizontal, 8).padding(.vertical, 4)
         .background(
             Capsule()
-                .fill(Color.white.opacity(0.06))
-                .overlay(Capsule().stroke(Color.white.opacity(0.18), lineWidth: 1))
-                .overlay(Capsule().stroke(Color("color1").opacity(0.45), lineWidth: 0.8))
+                .fill(Color.primary.opacity(0.06))
+                .overlay(Capsule().stroke(Color.primary.opacity(0.18), lineWidth: 1))
+                .overlay(Capsule().stroke(Color("color3").opacity(0.45), lineWidth: 0.8))
         )
     }
 }

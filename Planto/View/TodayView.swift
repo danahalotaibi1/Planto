@@ -16,16 +16,20 @@ struct TodayView: View {
             ZStack(alignment: .bottomTrailing) {
                 VStack(spacing: 14) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("My Plants 🌱").font(.largeTitle.bold())
-                        Divider().background(Color.white.opacity(0.12))
+                        Text("My Plants 🌱")
+                            .font(.largeTitle.bold())
+                            .foregroundColor(.primary)
+                        Divider().background(Color.primary.opacity(0.12))
+
                         if vm.doneCountToday == 0 {
                             Text("Your plants are waiting for a sip 💦").foregroundStyle(.secondary)
                         } else {
                             Text("\(vm.doneCountToday) of your plants feel loved today ✨")
                                 .foregroundStyle(.secondary)
                         }
+
                         ProgressView(value: animate ? vm.progressToday : 0)
-                            .tint(Color("color1"))
+                            .tint(Color("color3")) // أخضر موحد
                             .animation(.easeInOut(duration: 0.5), value: vm.progressToday)
                             .onAppear { animate = true }
                     }
@@ -47,7 +51,7 @@ struct TodayView: View {
                     .listStyle(.plain)
                 }
 
-                // زر + بزجاج سائل
+                // زر + بزجاج سائل (يشتغل على الدارك/اللايت)
                 Button {
                     vm.editingPlant = nil
                     vm.showAddSheet = true
@@ -60,17 +64,17 @@ struct TodayView: View {
                 .background(
                     Circle()
                         .fill(.ultraThinMaterial)
-                        .overlay(Circle().stroke(.white.opacity(0.25), lineWidth: 1))
-                        .shadow(color: .black.opacity(0.35), radius: 12, y: 6)
+                        .overlay(Circle().stroke(Color.primary.opacity(0.25), lineWidth: 1))
+                        .shadow(color: .black.opacity(0.25), radius: 12, y: 6)
                         .overlay(
                             Circle().fill(
                                 LinearGradient(colors: [.white.opacity(0.18), .clear],
                                                startPoint: .topLeading, endPoint: .bottomTrailing)
                             )
                         )
-                        .overlay(Circle().stroke(Color("color1").opacity(0.6), lineWidth: 1))
+                        .overlay(Circle().stroke(Color("color3").opacity(0.6), lineWidth: 1))
                 )
-                .tint(Color("color1"))
+                .tint(Color("color3"))
                 .padding(20)
             }
             .sheet(isPresented: Binding(
@@ -78,9 +82,9 @@ struct TodayView: View {
                 set: { if !$0 { vm.showAddSheet = false; vm.editingPlant = nil } }
             )) {
                 AddEditPlantSheet(editingPlant: vm.editingPlant)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(5.9)])   // ← تغطي 90%
             }
-            .background(Color.black.opacity(0.98))
+            .background(Color(.systemBackground)) // ← متكيّف
         }
     }
 }

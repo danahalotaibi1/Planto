@@ -13,12 +13,12 @@ struct StartView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 24) {
-                // عنوان أبيض
+                // العنوان (يتبع ألوان النظام)
                 VStack(alignment: .leading, spacing: 8) {
                     Text("My Plants 🌱")
                         .font(.largeTitle.bold())
-                        .foregroundColor(.white)                           // <- أبيض
-                    Divider().background(Color.white.opacity(0.12))
+                        .foregroundColor(.primary)
+                    Divider().background(Color.primary.opacity(0.12))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 4)
@@ -32,25 +32,23 @@ struct StartView: View {
                     .shadow(radius: 8, y: 3)
 
                 VStack(spacing: 8) {
-                    // العنوان الثاني أبيض
                     Text("Start your plant journey!")
                         .font(.title3.bold())
-                        .foregroundColor(.white)                           // <- أبيض
+                        .foregroundColor(.primary)
 
-                    // الفقرة بلون color4
+                    // يبقى بلون color4 مثل ما تبين، ويتكيّف مع الخلفية
                     Text("Now all your plants will be in one place and we will help you take care of them :) 🪴")
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("color4"))                  // <- color4
+                        .foregroundColor(Color("color4"))
                         .padding(.horizontal, 20)
                 }
 
+                // زر Liquid Glass أخضر color3
                 Button { showReminder = true } label: {
                     Text("Set Plant Reminder")
-                        .foregroundColor(.white)     // نص أبيض
+                        .foregroundColor(.white)
                 }
-               
-                .buttonStyle(LiquidGlassButtonStyle())                    // ستايل الزجاج
-                .tint(Color("color3"))                                    // يمرّر اللون للأثر
+                .buttonStyle(LiquidGlassButtonStyle())
                 .padding(.horizontal, 24)
 
                 Spacer(minLength: 40)
@@ -58,10 +56,10 @@ struct StartView: View {
             .padding(.horizontal, 16)
             .sheet(isPresented: $showReminder) {
                 AddEditPlantSheet()
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(5.9)])
             }
             .toolbar(.hidden, for: .navigationBar)
-            .background(Color.black.opacity(0.98))
+            .background(Color(.systemBackground)) // ← متكيّف مع النظام
         }
     }
 }
