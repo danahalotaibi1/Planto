@@ -19,19 +19,25 @@ struct TodayView: View {
                         Text("My Plants 🌱")
                             .font(.largeTitle.bold())
                             .foregroundColor(.primary)
-                        Divider().background(Color.primary.opacity(0.12))
+                        Divider()
+                            .background(Color.primary.opacity(0.12))
+                            .padding(.bottom, 35) // ← مسافة بسيطة بعد الخط
 
                         if vm.doneCountToday == 0 {
-                            Text("Your plants are waiting for a sip 💦").foregroundStyle(.secondary)
+                            Text("Your plants are waiting for a sip 💦")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.bottom, 12) // ← مسافة بين النص والـ ProgressView
                         } else {
                             Text("\(vm.doneCountToday) of your plants feel loved today ✨")
                                 .foregroundStyle(.secondary)
                         }
 
                         ProgressView(value: animate ? vm.progressToday : 0)
-                            .tint(Color("color3")) // أخضر موحد
+                            .tint(Color("color3"))
                             .animation(.easeInOut(duration: 0.5), value: vm.progressToday)
                             .onAppear { animate = true }
+                            .padding(.horizontal, 12) // ← تقلّص العرض من اليمين واليسار
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 16)
@@ -51,7 +57,6 @@ struct TodayView: View {
                     .listStyle(.plain)
                 }
 
-                // زر + بزجاج سائل (يشتغل على الدارك/اللايت)
                 Button {
                     vm.editingPlant = nil
                     vm.showAddSheet = true
@@ -82,9 +87,9 @@ struct TodayView: View {
                 set: { if !$0 { vm.showAddSheet = false; vm.editingPlant = nil } }
             )) {
                 AddEditPlantSheet(editingPlant: vm.editingPlant)
-                    .presentationDetents([.fraction(5.9)])   // ← تغطي 90%
+                    .presentationDetents([.fraction(5.9)])
             }
-            .background(Color(.systemBackground)) // ← متكيّف
+            .background(Color(.systemBackground))
         }
     }
 }

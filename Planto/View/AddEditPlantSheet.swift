@@ -53,26 +53,50 @@ struct AddEditPlantSheet: View {
 
                 // MARK: Room & Light
                 Section {
-                    Picker("Room", selection: $room) {
-                        ForEach(Room.allCases) { Text($0.rawValue).tag($0) }
+                    HStack {
+                        Image("room")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Room", selection: $room) {
+                            ForEach(Room.allCases) { Text($0.rawValue).tag($0) }
+                        }
                     }
                     .listRowBackground(Color("color2"))
 
-                    Picker("Light", selection: $light) {
-                        ForEach(LightLevel.allCases) { Text($0.rawValue).tag($0) }
+                    HStack {
+                        Image("sun")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Light", selection: $light) {
+                            ForEach(LightLevel.allCases) { Text($0.rawValue).tag($0) }
+                        }
                     }
                     .listRowBackground(Color("color2"))
                 }
 
                 // MARK: Watering & Amount
                 Section {
-                    Picker("Watering Days", selection: $schedule) {
-                        ForEach(WateringDays.allCases) { Text($0.rawValue).tag($0) }
+                    HStack {
+                        Image("water")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Watering Days", selection: $schedule) {
+                            ForEach(WateringDays.allCases) { Text($0.rawValue).tag($0) }
+                        }
                     }
                     .listRowBackground(Color("color2"))
 
-                    Picker("Water", selection: $water) {
-                        ForEach(WaterAmount.allCases) { Text($0.rawValue).tag($0) }
+                    HStack {
+                        Image("water")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Water", selection: $water) {
+                            ForEach(WaterAmount.allCases) { Text($0.rawValue).tag($0) }
+                        }
                     }
                     .listRowBackground(Color("color2"))
                 }
@@ -80,9 +104,7 @@ struct AddEditPlantSheet: View {
             .scrollContentBackground(.hidden)
             .background(Color("color1"))
 
-            // ✅✅ التولبار المصحّح (واحد فقط، غير متعشّش)
             .toolbar {
-                // زر الإغلاق ❌ (color1) + Liquid Glass دائرة
                 ToolbarItem(placement: .cancellationAction) {
                     Button { dismiss() } label: {
                         Image(systemName: "xmark")
@@ -96,14 +118,12 @@ struct AddEditPlantSheet: View {
                     )
                 }
 
-                // العنوان بمنتصف التولبار
                 ToolbarItem(placement: .principal) {
                     Text("Set Reminder")
                         .font(.headline)
                         .foregroundColor(.white)
                 }
 
-                // زر التأكيد ✅ (color3) + Liquid Glass دائرة
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
                         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
