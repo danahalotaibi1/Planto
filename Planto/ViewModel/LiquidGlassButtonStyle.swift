@@ -75,29 +75,54 @@ struct LiquidGlassButtonStyle: ButtonStyle {
                     .frame(width: d, height: d)
                     .background(
                         ZStack {
+                            // 1) اللون الأساسي الأخضر (من الأصول)
                             Circle()
-                                .fill(baseColor)
-                                .brightness(pressed ? -0.06 : 0)
+                                .fill(baseColor.opacity(0.88))
+                                .brightness(configuration.isPressed ? -0.06 : 0)
 
+                            // 2) طبقة زجاج (Material) رقيقة لإحساس الشفافية
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .opacity(0.28)
+
+                            // 3) لمعة مائلة من الأعلى لليسار (specular highlight)
                             Circle()
                                 .fill(
                                     LinearGradient(
-                                        colors: [Color.white.opacity(pressed ? 0.12 : 0.18), .clear],
+                                        colors: [Color.white.opacity(configuration.isPressed ? 0.10 : 0.18), .clear],
                                         startPoint: .topLeading, endPoint: .bottomTrailing
                                     )
                                 )
                                 .padding(2)
 
+                            // 4) ظل داخلي خفي عند الحافة السفلية لإضافة عمق
                             Circle()
-                                .stroke(Color.white.opacity(0.25), lineWidth: 1)
+                                .stroke(Color.black.opacity(0.35), lineWidth: 8)
+                                .blur(radius: 5)
+                                .offset(y: 3)
+                                .mask(
+                                    Circle().fill(
+                                        LinearGradient(
+                                            colors: [.clear, .black],
+                                            startPoint: .top, endPoint: .bottom
+                                        )
+                                    )
+                                )
+
+                            // 5) حلقة حافة زجاجية رفيعة
+                            Circle()
+                                .stroke(Color.white.opacity(0.22), lineWidth: 0.8)
+
+                            // 6) Rim ملوّن بنفس لون الزر لإحساس “edge glow”
+                            Circle()
+                                .stroke(baseColor.opacity(0.9), lineWidth: 1)
                         }
                     )
-                    .overlay(
-                        Circle().stroke(baseColor.opacity(0.9), lineWidth: 1)
-                    )
-                    .shadow(color: .black.opacity(0.35), radius: pressed ? 8 : 12, x: 0, y: pressed ? 3 : 6)
-                    .scaleEffect(pressed ? 0.95 : 1.0)
-                    .animation(.easeOut(duration: 0.12), value: pressed)
+                    // ظلال خارجية مزدوجة لرفع الزر عن الخلفية
+                    .shadow(color: .black.opacity(0.35), radius: configuration.isPressed ? 8 : 12, x: 0, y: configuration.isPressed ? 3 : 6)
+                    .shadow(color: baseColor.opacity(0.35), radius: 10, x: 0, y: 0)
+                    .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+                    .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
             )
         }
     }

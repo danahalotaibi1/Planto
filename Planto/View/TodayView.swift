@@ -5,6 +5,7 @@
 //  Created by dana on 01/05/1447 AH.
 //
 
+
 import SwiftUI
 
 struct TodayView: View {
@@ -63,24 +64,17 @@ struct TodayView: View {
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 22, weight: .bold))
-                        .padding(18)
                         .foregroundStyle(.white)
                 }
-                .background(
-                    Circle()
-                        .fill(.ultraThinMaterial)
-                        .overlay(Circle().stroke(Color.primary.opacity(0.25), lineWidth: 1))
-                        .shadow(color: .black.opacity(0.25), radius: 12, y: 6)
-                        .overlay(
-                            Circle().fill(
-                                LinearGradient(colors: [.white.opacity(0.18), .clear],
-                                               startPoint: .topLeading, endPoint: .bottomTrailing)
-                            )
-                        )
-                        .overlay(Circle().stroke(Color("color3").opacity(0.6), lineWidth: 1))
+                .buttonStyle(
+                    LiquidGlassButtonStyle(
+                        shape: .circle(diameter: 59),     // حجم الزر الدائري (غيّريه 52–64 حسب ذوقك)
+                        baseColor: Color("color3")        // أخضر من الأصول
+                    )
                 )
-                .tint(Color("color3"))
                 .padding(20)
+                }
+              
             }
             .sheet(isPresented: Binding(
                 get: { vm.showAddSheet || vm.editingPlant != nil },
@@ -92,4 +86,4 @@ struct TodayView: View {
             .background(Color(.systemBackground))
         }
     }
-}
+

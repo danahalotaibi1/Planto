@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct PlantRow: View {
     let plant: Plant
     let isDoneToday: Bool
@@ -16,7 +15,9 @@ struct PlantRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
-                Image(systemName: "location.north.circle")
+                // أيقونة الغرفة من الـ Assets
+                Image("room")
+                    .renderingMode(.template)
                 Text("in \(plant.room.rawValue)")
             }
             .font(.caption)
@@ -26,7 +27,7 @@ struct PlantRow: View {
                 Button(action: onToggle) {
                     Image(systemName: isDoneToday ? "checkmark.circle.fill" : "circle")
                         .font(.title3)
-                        .foregroundStyle(isDoneToday ? Color("color3") : .secondary) // إن حبيتي
+                        .foregroundStyle(isDoneToday ? Color("color3") : .secondary)
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
@@ -36,9 +37,17 @@ struct PlantRow: View {
                             .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+
                     HStack(spacing: 8) {
-                        Chip(icon: "sun.max",  text: plant.light.rawValue)
-                        Chip(icon: "drop.fill", text: plant.water.rawValue)
+                        // Light chip (sun - أصفر)
+                        Chip(assetIcon: "sun",
+                             text: plant.light.rawValue,
+                             tintColor: Color("color5"))
+
+                        // Water chip (water - أزرق)
+                        Chip(assetIcon: "water",
+                             text: plant.water.rawValue,
+                             tintColor: Color("color6"))
                     }
                 }
             }
@@ -50,19 +59,26 @@ struct PlantRow: View {
 }
 
 private struct Chip: View {
-    var icon: String
+    var assetIcon: String
     var text: String
+    var tintColor: Color
+
     var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: icon).font(.caption2)
-            Text(text).font(.caption)
+            Image(assetIcon)
+                .renderingMode(.template)
+                .foregroundStyle(tintColor) // ← لون الأيقونة
+
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(tintColor) // ← لون النص نفسه
         }
-        .padding(.horizontal, 8).padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
         .background(
             Capsule()
-                .fill(Color.primary.opacity(0.06))
-                .overlay(Capsule().stroke(Color.primary.opacity(0.18), lineWidth: 1))
-                .overlay(Capsule().stroke(Color("color3").opacity(0.45), lineWidth: 0.8))
+                .fill(Color("color1")) // ← خلفية موحدة
+                .overlay(Capsule().stroke(Color.white.opacity(0.08), lineWidth: 0.6))
         )
     }
 }

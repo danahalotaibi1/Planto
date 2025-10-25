@@ -4,8 +4,8 @@
 //
 //  Created by dana on 30/04/1447 AH.
 
-import SwiftUI
 
+import SwiftUI
 struct StartView: View {
     @EnvironmentObject private var vm: PlantsViewModel
     @State private var showReminder = false
