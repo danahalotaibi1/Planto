@@ -15,6 +15,7 @@ struct PlantoApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
+                .environmentObject(vm) // إصلاح الخطأ: حقن الـ EnvironmentObject
         }
     }
 }
