@@ -25,7 +25,7 @@ struct StartView: View {
 
                 Spacer()
 
-                Image("plant")
+                Image("plant1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200)

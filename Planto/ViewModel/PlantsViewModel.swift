@@ -18,20 +18,30 @@ final class PlantsViewModel: ObservableObject {
     init() { load() }
 
     // MARK: - Today state
+    private var calendar: Calendar { Calendar.current }
+
     func isWateredToday(_ p: Plant) -> Bool {
         guard let d = p.lastWateredAt else { return false }
-        return Calendar.current.isDateInToday(d)
+        let startToday = calendar.startOfDay(for: Date())
+        let startWater = calendar.startOfDay(for: d)
+        return startToday == startWater
     }
 
     func toggleWatered(_ p: Plant) {
         guard let i = plants.firstIndex(where: { $0.id == p.id }) else { return }
-        if isWateredToday(plants[i]) {
-            // إلغاء تشيك اليوم
-            plants[i].lastWateredAt = nil
+
+        var item = plants[i]
+        if isWateredToday(item) {
+            // إلغاء تشيك “اليوم” فقط
+            item.lastWateredAt = nil
         } else {
             // تشيك اليوم الآن
-            plants[i].lastWateredAt = Date()
+            item.lastWateredAt = Date()
         }
+
+        // إعادة الإسناد لتحفيز @Published على التحديث
+        plants[i] = item
+
         save()
     }
 
