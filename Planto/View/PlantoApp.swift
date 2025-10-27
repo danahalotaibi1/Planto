@@ -11,7 +11,7 @@ import UserNotifications
 @main
 struct PlantoApp: App {
     @StateObject private var vm = PlantsViewModel()
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate   // ← كما هو
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate // ← كما هو
 
     var body: some Scene {
         WindowGroup {
@@ -32,8 +32,8 @@ struct PlantoApp: App {
                             print("Notifications not granted")
                         }
                     }
-                    }
                 }
         }
     }
+}
 

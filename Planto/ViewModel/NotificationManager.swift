@@ -19,8 +19,14 @@ final class NotificationManager: ObservableObject {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             // اختياري: اطبعي الحالة للمراجعة في الكونسول
-            if granted { print("✅ Notifications allowed") } else { print("🚫 Notifications not allowed") }
-            DispatchQueue.main.async { completion?(granted) }
+            if granted {
+                print("✅ Notifications allowed")
+            } else {
+                print("🚫 Notifications not allowed")
+            }
+            DispatchQueue.main.async {
+                completion?(granted)
+            }
         }
     }
 
@@ -58,6 +64,11 @@ final class NotificationManager: ObservableObject {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
-    func cancelAll() { UNUserNotificationCenter.current().removeAllPendingNotificationRequests() }
-    func cancel(id: String) { UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id]) }
+    func cancelAll() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+    func cancel(id: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+    }
 }
