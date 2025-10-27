@@ -7,7 +7,7 @@ It provides a simple and elegant way to manage watering schedules and plant deta
 
 ⏰ notifications to remind users when it’s time to water their plants.
 
-🪴 Plant management — add, edit, or delete plants easily.
+🪴 Plant management add, edit, or delete plants easily.
 
 💧 Custom watering schedules (daily or specific days).
 
