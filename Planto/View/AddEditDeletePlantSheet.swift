@@ -26,119 +26,120 @@ struct AddEditDeletePlantSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 18) {
-
-                // ====== النموذج (نفس AddEditPlantSheet) ======
-                Form {
-                    // MARK: Name
-                    Section {
-                        HStack {
-                            ZStack(alignment: .leading) {
-                                if name.isEmpty {
-                                    HStack(spacing: 0) {
-                                        Text("Plant Name").foregroundColor(.white)
-                                        Text("  Pothos").foregroundColor(Color.gray.opacity(0.6))
-                                    }
-                                    .padding(.horizontal, 16)
+            Form {
+                // MARK: Name
+                Section {
+                    HStack {
+                        ZStack(alignment: .leading) {
+                            if name.isEmpty {
+                                HStack(spacing: 0) {
+                                    Text("Plant Name").foregroundColor(.white)
+                                    Text("  Pothos").foregroundColor(Color.gray.opacity(0.6))
                                 }
-
-                                TextField("", text: $name)
-                                    .foregroundColor(.white)
-                                    .textInputAutocapitalization(.words)
-                                    .submitLabel(.done)
-                                    .padding(.vertical, 16)
-                                    .padding(.horizontal, 16)
+                                .padding(.horizontal, 16)
                             }
-                            .frame(maxWidth: .infinity)
-                            .background(Color("color2"), in: RoundedRectangle(cornerRadius: 24))
-                        }
-                    }
-                    .listRowInsets(EdgeInsets(top: 6, leading: 5, bottom: 6, trailing: 5))
-                    .listRowBackground(Color.clear)
 
-                    // MARK: Room & Light
-                    Section {
-                        HStack {
-                            Image("room")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 18, height: 18)
-                            Picker("Room", selection: $room) {
-                                ForEach(Room.allCases) { Text($0.rawValue).tag($0) }
-                            }
+                            TextField("", text: $name)
+                                .foregroundColor(.white)
+                                .textInputAutocapitalization(.words)
+                                .submitLabel(.done)
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 16)
                         }
-                        .listRowBackground(Color("color2"))
-
-                        HStack {
-                            Image("sun")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 18, height: 18)
-                            Picker("Light", selection: $light) {
-                                ForEach(LightLevel.allCases) { Text($0.rawValue).tag($0) }
-                            }
-                        }
-                        .listRowBackground(Color("color2"))
-                    }
-
-                    // MARK: Watering & Amount
-                    Section {
-                        HStack {
-                            Image("water")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 18, height: 18)
-                            Picker("Watering Days", selection: $schedule) {
-                                ForEach(WateringDays.allCases) { Text($0.rawValue).tag($0) }
-                            }
-                        }
-                        .listRowBackground(Color("color2"))
-
-                        HStack {
-                            Image("water")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 18, height: 18)
-                            Picker("Water", selection: $water) {
-                                ForEach(WaterAmount.allCases) { Text($0.rawValue).tag($0) }
-                            }
-                        }
-                        .listRowBackground(Color("color2"))
+                        .frame(maxWidth: .infinity)
+                        .background(Color("color2"), in: RoundedRectangle(cornerRadius: 24))
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .background(Color("color1"))
+                .listRowInsets(EdgeInsets(top: 6, leading: 5, bottom: 6, trailing: 5))
+                .listRowBackground(Color.clear)
 
-                // ====== زر الحذف (يظهر فقط عند التحرير) ======
-                if editingPlant != nil {
-                    Button(role: .destructive) {
-                        showDeleteConfirm = true
-                    } label: {
-                        Text("Delete Reminder")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .foregroundColor(.red)
-                            .background(
-                                RoundedRectangle(cornerRadius: 26)
-                                    .fill(Color("color2"))
-                            )
-                    }
-                    .padding(.horizontal, 22)
-                    .confirmationDialog("Delete this reminder?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
-                        Button("Delete", role: .destructive) {
-                            if let p = editingPlant,
-                               let idx = vm.plants.firstIndex(where: { $0.id == p.id }) {
-                                vm.delete(at: IndexSet(integer: idx))
-                                dismiss()
-                            }
+                // MARK: Room & Light
+                Section {
+                    HStack {
+                        Image("room")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Room", selection: $room) {
+                            ForEach(Room.allCases) { Text($0.rawValue).tag($0) }
                         }
-                        Button("Cancel", role: .cancel) { }
                     }
-                    .padding(.bottom, 8)
+                    .listRowBackground(Color("color2"))
+
+                    HStack {
+                        Image("sun")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Light", selection: $light) {
+                            ForEach(LightLevel.allCases) { Text($0.rawValue).tag($0) }
+                        }
+                    }
+                    .listRowBackground(Color("color2"))
+                }
+
+                // MARK: Watering & Amount
+                Section {
+                    HStack {
+                        Image("water")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Watering Days", selection: $schedule) {
+                            ForEach(WateringDays.allCases) { Text($0.rawValue).tag($0) }
+                        }
+                    }
+                    .listRowBackground(Color("color2"))
+
+                    HStack {
+                        Image("water")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Picker("Water", selection: $water) {
+                            ForEach(WaterAmount.allCases) { Text($0.rawValue).tag($0) }
+                        }
+                    }
+                    .listRowBackground(Color("color2"))
+                }
+
+                // ====== Delete Button مباشرة بعد Water ======
+                if editingPlant != nil {
+                    Section {
+                        Button(role: .destructive) {
+                            showDeleteConfirm = true
+                        } label: {
+                            Text("Delete Reminder")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .foregroundColor(.red)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 26)
+                                        .fill(Color("color2"))
+                                )
+                        }
+                        .confirmationDialog(
+                            "Delete this reminder?",
+                            isPresented: $showDeleteConfirm,
+                            titleVisibility: .visible
+                        ) {
+                            Button("Delete", role: .destructive) {
+                                if let p = editingPlant,
+                                   let idx = vm.plants.firstIndex(where: { $0.id == p.id }) {
+                                    vm.delete(at: IndexSet(integer: idx))
+                                    dismiss()
+                                }
+                            }
+                            Button("Cancel", role: .cancel) { }
+                        }
+                    }
+                    .listRowInsets(EdgeInsets(top: 6, leading: 22, bottom: 6, trailing: 22))
+                    .listRowBackground(Color.clear)
                 }
             }
-            // ====== شريط الأدوات ======
+            .scrollContentBackground(.hidden)
+            .background(Color("color1"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button { dismiss() } label: {
